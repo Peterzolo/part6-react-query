@@ -5,8 +5,7 @@ import { getAllAnecdotes } from "./services/request";
 
 const App = () => {
   const result = useQuery("notes", getAllAnecdotes);
-
-  console.log("RESULT", result);
+  const anecdotes = result.data;
 
   if (result.isLoading) {
     return <div>loading data...</div>;
@@ -16,14 +15,6 @@ const App = () => {
     console.log("vote");
   };
 
-  const anecdotes = [
-    {
-      content: "If it hurts, do it more often",
-      id: "47145",
-      votes: 0,
-    },
-  ];
-
   return (
     <div>
       <h3>Anecdote app</h3>
@@ -31,15 +22,16 @@ const App = () => {
       <Notification />
       <AnecdoteForm />
 
-      {anecdotes.map((anecdote) => (
-        <div key={anecdote.id}>
-          <div>{anecdote.content}</div>
-          <div>
-            has {anecdote.votes}
-            <button onClick={() => handleVote(anecdote)}>vote</button>
+      {anecdotes &&
+        anecdotes.map((anecdote) => (
+          <div key={anecdote.id}>
+            <div>{anecdote.content}</div>
+            <div>
+              has {anecdote.votes}
+              <button onClick={() => handleVote(anecdote)}>vote</button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
     </div>
   );
 };

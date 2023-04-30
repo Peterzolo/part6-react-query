@@ -1,19 +1,31 @@
 import AnecdoteForm from "./components/AnecdoteForm";
 import Notification from "./components/Notification";
-import { useQuery } from "react-query";
-import { getAllAnecdotes } from "./services/request";
+import { useQuery, useMutation, queryCache } from "react-query";
+import { getAllAnecdotes, updateVoteAnecdote } from "./services/request";
 
 const App = () => {
-  const result = useQuery("notes", getAllAnecdotes);
-  const anecdotes = result.data;
-
-  if (result.isLoading) {
-    return <div>loading data...</div>;
-  }
+  const {
+    data: anecdotes,
+    isLoading,
+    isError,
+  } = useQuery("anecdotes", getAllAnecdotes, {
+    refetchOnWindowFocus: false,
+    retry: 1,
+    refetchInterval: false,
+    timeout: 5000,
+  });
 
   const handleVote = (anecdote) => {
-    console.log("vote");
+    console.log(anecdote);
   };
+
+  if (isLoading) {
+    return <div>Loading data...</div>;
+  }
+
+  if (isError) {
+    return <div>Anecdote service not available due to server problem</div>;
+  }
 
   return (
     <div>

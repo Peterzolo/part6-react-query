@@ -16,6 +16,9 @@
 
 .content {
   color: #434343;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
 }
 
 .vote-wrap {
@@ -30,5 +33,28 @@
   margin-right: 20px;
 }
 
-.vote-count {
+.vote-btn {
+  width: 200px;
+  padding: 10px;
+  background-color: #0958d9;
+  border: transparent;
+  color: white;
+  border-radius: 10px;
+}
+
+.create-input {
+  padding: 10px;
+  width: 400px;
+  height: 25px;
+}
+
+.create-btn {
+  width: 100px;
+  padding: 10px;
+  background-color: #0958d9;
+  border: transparent;
+  color: white;
+  height: 50px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }

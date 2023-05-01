@@ -50,8 +50,10 @@ const AnecdoteForm = () => {
     <div>
       <h3>create new</h3>
       <form onSubmit={handleOnCreate}>
-        <input name="anecdote" />
-        <button type="submit">create</button>
+        <input name="anecdote" className="create-input" />
+        <button type="submit" className="create-btn">
+          Create
+        </button>
       </form>
     </div>
   );

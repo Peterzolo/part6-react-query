@@ -3,6 +3,8 @@ import Notification from "./components/Notification";
 import { useQuery, useMutation, queryCache } from "react-query";
 import { getAllAnecdotes, updateVoteAnecdote } from "./services/request";
 
+import "./App.css";
+
 const App = () => {
   const {
     data: anecdotes,
@@ -28,19 +30,20 @@ const App = () => {
   }
 
   return (
-    <div>
+    <div className="main-wrapper">
       <h3>Anecdote app</h3>
-
       <Notification />
       <AnecdoteForm />
-
       {anecdotes &&
         anecdotes.map((anecdote) => (
-          <div key={anecdote.id}>
-            <div>{anecdote.content}</div>
-            <div>
-              has {anecdote.votes}
-              <button onClick={() => handleVote(anecdote)}>vote</button>
+          <div key={anecdote.id} className="anecdote-wrap">
+            <div className="content">{anecdote.content}</div>
+            <div className="vote-wrap">
+              <div className="has">has </div>{" "}
+              <div className="vote-count"> {anecdote.votes} </div>
+              <button className="vote-btn" onClick={() => handleVote(anecdote)}>
+                vote
+              </button>
             </div>
           </div>
         ))}

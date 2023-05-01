@@ -63,6 +63,16 @@
       "content": "New Anecdote Created",
       "votes": 0,
       "id": "gLefX25"
+    },
+    {
+      "content": "Hello testing Anecdote creation",
+      "votes": 0,
+      "id": "y0fu11b"
+    },
+    {
+      "content": "React and Typescript",
+      "votes": 0,
+      "id": "t8mKKyZ"
     }
   ]
 }

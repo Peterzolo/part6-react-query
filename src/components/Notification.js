@@ -12,7 +12,15 @@ const Notification = () => {
 
   if (!state.message) return null;
 
-  return <div style={style}>{state.message}</div>;
+  if (state.error) {
+    return <div style={{ ...style, color: "red" }}>{state.error}</div>;
+  }
+
+  if (state.message) {
+    return <div style={style}>{state.message}</div>;
+  }
+
+  return null;
 };
 
 export default Notification;

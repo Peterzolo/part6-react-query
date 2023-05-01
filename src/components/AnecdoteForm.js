@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
+
 import { createAnecdote, getId } from "../services/request";
 import { useContext } from "react";
 import { NotificationContext } from "../context/NotificationContext";
@@ -15,21 +16,32 @@ const AnecdoteForm = () => {
         dispatch({ type: "CLEAR_NOTIFICATION" });
       }, 5000);
     },
+    onError: (error) => {
+      dispatch({ type: "SET_NOTIFICATION", payload: error.message });
+      setTimeout(() => {
+        dispatch({ type: "CLEAR_NOTIFICATION" });
+      }, 5000);
+    },
   });
 
   const handleOnCreate = (event) => {
     event.preventDefault();
     const content = event.target.anecdote.value;
+
     if (content.length < 5) {
-      dispatch({
-        type: "SET_NOTIFICATION",
-        payload: "Anecdote must be at least 5 characters long.",
-      });
-      setTimeout(() => {
-        dispatch({ type: "CLEAR_NOTIFICATION" });
-      }, 5000);
+      newAnecdoteMutation.onError = (error) => {
+        dispatch({
+          type: "SET_NOTIFICATION",
+          payload: "Anecdote content must be at least 5 characters.",
+        });
+        setTimeout(() => {
+          dispatch({ type: "CLEAR_NOTIFICATION" });
+        }, 5000);
+      };
+      newAnecdoteMutation.onError();
       return;
     }
+
     event.target.anecdote.value = "";
     newAnecdoteMutation.mutate({ content, votes: 0, id: getId });
   };

@@ -21,7 +21,13 @@ const AnecdoteForm = () => {
     event.preventDefault();
     const content = event.target.anecdote.value;
     if (content.length < 5) {
-      alert("Anecdote content should be at least 5 characters long.");
+      dispatch({
+        type: "SET_NOTIFICATION",
+        payload: "Anecdote must be at least 5 characters long.",
+      });
+      setTimeout(() => {
+        dispatch({ type: "CLEAR_NOTIFICATION" });
+      }, 5000);
       return;
     }
     event.target.anecdote.value = "";
